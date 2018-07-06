@@ -7,39 +7,36 @@
 
 void broadcastRec()
 {
-	BOOL optval = TRUE;
-	int addr_bro_len;
+	BOOL optval = TRUE;//可重用==TRUE
+	int addr_bro_len= sizeof(addr_bro_rec);
 	char buf[256];
-	DWORD i = 0;
+	unsigned long int i = 0;
 
 
-	WORD   wVersionRequested;//定义socket1.1或者socket2.0   
+	WORD   wVersionRequested;//定义socket2.0(socket1.1也可以)   
 	WSADATA   wsaData;   //定义装载socket版本的变量
 	wVersionRequested = MAKEWORD(2, 2);
-	WSAStartup(wVersionRequested, &wsaData);
+	WSAStartup(wVersionRequested, &wsaData);//启动
 
 
-	addr_bro_rec.sin_family = AF_INET;
-	addr_bro_rec.sin_addr.S_un.S_addr = options.bro_addr;
-	addr_bro_rec.sin_port = htons(options.bro_port);
-
-
-	addr_bro_len = sizeof(addr_bro_rec);
+	addr_bro_rec.sin_family = AF_INET;//在socket中只能是静态值AF_INET
+	addr_bro_rec.sin_addr.S_un.S_addr = options.bro_addr;//ip赋值
+	addr_bro_rec.sin_port = htons(options.bro_port);//端口号赋值
 
 	socket_bro_rec = socket(AF_INET, SOCK_DGRAM, 0);
 
-	if (INVALID_SOCKET == socket_bro_rec)
+	if (INVALID_SOCKET == socket_bro_rec)//捕捉错误,错误代码可以从网上找到对应问题
 	{
-		printf("socket创建失败,错误代码%d", WSAGetLastError());
+		printf("\n-----socket创建失败,错误代码%d-----", WSAGetLastError());
 		WSACleanup();
 		system("pause");
 
 		return;
 	}
-	//设置套接字可以重用
+	//设置套接字可以重用,捕获错误
 	if (setsockopt(socket_bro_rec, SOL_SOCKET, SO_REUSEADDR, (char FAR*)&optval,sizeof(optval))==SOCKET_ERROR)
 	{
-		printf("设置失败,错误代码%d", WSAGetLastError());
+		printf("\n-----重用设置失败,错误代码%d-----", WSAGetLastError());
 		closesocket(socket_bro_rec);
 		WSACleanup();
 		system("pause");
@@ -49,7 +46,7 @@ void broadcastRec()
 	//参数绑定
 	if (bind(socket_bro_rec, (sockaddr*)&addr_bro_rec, sizeof(sockaddr)) == SOCKET_ERROR)
 	{
-		printf("绑定套接字地址失败,错误码%d", WSAGetLastError());
+		printf("\n-----绑定套接字地址失败,错误码%d-----", WSAGetLastError());
 		closesocket(socket_bro_rec);
 		WSACleanup();
 		system("pause");
@@ -57,13 +54,15 @@ void broadcastRec()
 		return;
 	}
 
-	while (i < options.bro_count)
+	while (i < options.bro_count)		//开始监听端口,并将获得的信息打印出来
 	{
+		puts("开始接收消息");
 		recvfrom(socket_bro_rec, buf, 255, 0, (struct sockaddr FAR*)&options.bro_addr, (int FAR*)&addr_bro_len);
-		printf("收到消息:%s\n", buf);
+		printf("\n\n(第%d次)收到远程消息消息:    %s\n\n", i+1,buf);
 		ZeroMemory(buf, 256);
 		i++;
 	}
+	puts("-----消息接收完毕!-----");
 	closesocket(socket_bro_rec);
-	WSACleanup();
+	WSACleanup();		//释放资源
 }

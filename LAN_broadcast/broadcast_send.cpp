@@ -13,13 +13,13 @@ void broadcastSend()
 	DWORD i = 0;
 	WORD   wVersionRequested;//定义socket1.1或者socket2.0   
 	WSADATA   wsaData;   //定义装载socket版本的变量
-	wVersionRequested = MAKEWORD(2, 2);
+	wVersionRequested = MAKEWORD(2, 2);//详情参见broadcast_rec.cpp
 	WSAStartup(wVersionRequested, &wsaData);
 	socket_bro_send = WSASocket(AF_INET,SOCK_DGRAM,0,NULL,0,WSA_FLAG_OVERLAPPED);
 	if (socket_bro_send == INVALID_SOCKET)
 	{
-		puts("创建失败,,错误代码");
-		printf("%d", WSAGetLastError());
+		puts("----socket创建失败,,错误代码");
+		printf("%d\n\n----", WSAGetLastError());
 		WSACleanup();
 		system("pause");
 		return;
@@ -31,7 +31,7 @@ void broadcastSend()
 
 	if (setsockopt(socket_bro_send, SOL_SOCKET, SO_BROADCAST, (char FAR*)&opt, sizeof(opt)) == SOCKET_ERROR)
 	{
-		printf("设置失败,错误代码:%d", WSAGetLastError());
+		printf("----设置失败,错误代码:%d-----\n", WSAGetLastError());
 		closesocket(socket_bro_send);
 		WSACleanup();
 		system("pause");
@@ -42,12 +42,13 @@ void broadcastSend()
 	while (i < options.bro_count)
 	{
 		char* msg = new char[100];
-		fgets(msg, 99, stdin);
-	ret = sendto(socket_bro_send,(char*)msg, 256, 0, (const struct  sockaddr*)&addr_bro_send, nlen);
+		printf("\n请输入消息:\n");
+		fgets(msg, 99, stdin);//等同于gets(),更安全,防溢出
+	ret = sendto(socket_bro_send,(char*)msg, 256, 0, (const struct  sockaddr*)&addr_bro_send, nlen);//发送消息并捕获错误
 		if (ret == SOCKET_ERROR)
-			printf("失败,错误码:%d", WSAGetLastError());
+			printf("----消息发送失败,错误码:%d\n-----", WSAGetLastError());
 		else {
-			printf("发送消息%d次", i);
+			printf("\n发送成功  (第%d次)\n", i+1);
 		}
 		i++;
 	}

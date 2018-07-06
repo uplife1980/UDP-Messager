@@ -12,7 +12,7 @@ char get_options[3];				//未经处理的options
 struct options options;
 void initial()//初始化全局变量
 {
-	options.isSender = 0;		//默认是接受者
+	options.isSender = 1;		//默认是接受者
 	options.isSending = 1;		//默认不开启功能
 	options.bro_count = MAX_MASSAGES;//每次最多接收/发送的消息数目
 	options.bro_port = BROADCAST_PORT;//使用的端口,默认14567

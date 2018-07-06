@@ -1,13 +1,3 @@
-﻿  broadcast_rec.cpp
-  broadcast_send.cpp
-  get_option.cpp
-get_option.cpp(36): warning C4473: “scanf_s”: 没有为格式字符串传递足够的参数
-  get_option.cpp(36): note: 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
-  get_option.cpp(36): note: 缺失的可变参数 2 为格式字符串“%s”所需
-  get_option.cpp(36): note: 此参数用作缓冲区大小
-  main.cpp
-main.cpp(11): warning C4101: “wsd”: 未引用的局部变量
-  overall.cpp
-  正在生成代码...
+﻿  main.cpp
   LAN_broadcast.vcxproj -> E:\my-file\c\LAN_broadcast\Release\LAN_broadcast.exe
   LAN_broadcast.vcxproj -> E:\my-file\c\LAN_broadcast\Release\LAN_broadcast.pdb (Full PDB)

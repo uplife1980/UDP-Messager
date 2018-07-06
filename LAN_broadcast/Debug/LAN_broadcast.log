@@ -1,3 +1,5 @@
-﻿  broadcast_rec.cpp
+﻿  broadcast_send.cpp
+  broadcast_rec.cpp
+  正在生成代码...
   LAN_broadcast.vcxproj -> E:\my-file\c\LAN_broadcast\Debug\LAN_broadcast.exe
   LAN_broadcast.vcxproj -> E:\my-file\c\LAN_broadcast\Debug\LAN_broadcast.pdb (Partial PDB)

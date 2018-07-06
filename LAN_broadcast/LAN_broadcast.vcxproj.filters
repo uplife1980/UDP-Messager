@@ -30,6 +30,9 @@
     <ClCompile Include="broadcast_rec.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="help.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">

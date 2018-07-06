@@ -120,6 +120,7 @@
     <ClCompile Include="broadcast_rec.cpp" />
     <ClCompile Include="broadcast_send.cpp" />
     <ClCompile Include="get_option.cpp" />
+    <ClCompile Include="help.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="overall.cpp" />
   </ItemGroup>
