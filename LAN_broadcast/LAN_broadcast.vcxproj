@@ -123,6 +123,7 @@
     <ClCompile Include="help.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="overall.cpp" />
+    <ClCompile Include="xor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="overall.h" />

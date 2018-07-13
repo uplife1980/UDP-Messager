@@ -1,6 +1,7 @@
 //包含所有常量
 #define BROADCAST_PORT 14567 //广播使用的端口
 #define MAX_MASSAGES 20//最多接收的信息
+#define MAX_PASSWORD 100//定义密码的最长
 
 //包含所有的extern变量
 struct options {
@@ -9,8 +10,11 @@ struct options {
 	unsigned long bro_addr;//广播地址
 	unsigned long bro_count; //message总数
 	int isSending; //是否处于接受模式
+	char *password;
 };
 extern char get_options[3];
+extern char *afterpass;
+extern char *beforepass;
 extern SOCKET socket_bro_send; 
 extern SOCKET socket_bro_rec;
 extern struct options options;
@@ -25,3 +29,5 @@ void getOptions();
 void broadcastSend();
 void broadcastRec();
 void help();
+void encrypt(char*);
+void unencrypt(char*,char*);

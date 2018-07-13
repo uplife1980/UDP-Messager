@@ -63,6 +63,13 @@ void getOptions()
 				i ? options.isSender = 0 : options.isSender = 1;
 				break;
 			}
+			case'm': {//设置传输密码
+				char *ch = new char[100];
+				getchar();
+				fgets(ch, 99, stdin);
+				options.password = ch;
+				break;
+			}
 			case 'q': {//退出设置选项
 				return;
 			}

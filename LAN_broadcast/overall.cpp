@@ -12,9 +12,12 @@ char get_options[3];				//未经处理的options
 struct options options;
 void initial()//初始化全局变量
 {
-	options.isSender = 1;		//默认是接受者
-	options.isSending = 1;		//默认不开启功能
+	options.isSender = 0;		//默认是接受者
+	options.isSending = 0;		//默认不开启功能
 	options.bro_count = MAX_MASSAGES;//每次最多接收/发送的消息数目
 	options.bro_port = BROADCAST_PORT;//使用的端口,默认14567
 	options.bro_addr = 0xffffffff;//默认ip:255.255.255.255(网关地址)
+	options.password = "111";
 }
+char *afterpass=new char[256];
+char *beforepass = new char[256];

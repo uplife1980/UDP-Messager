@@ -9,9 +9,9 @@ void broadcastRec()
 {
 	BOOL optval = TRUE;//可重用==TRUE
 	int addr_bro_len= sizeof(addr_bro_rec);
-	char buf[256];
+	char *buf=new char[256];
 	unsigned long int i = 0;
-
+	char *password = options.password;
 
 	WORD   wVersionRequested;//定义socket2.0(socket1.1也可以)   
 	WSADATA   wsaData;   //定义装载socket版本的变量
@@ -56,9 +56,10 @@ void broadcastRec()
 
 	while (i < options.bro_count)		//开始监听端口,并将获得的信息打印出来
 	{
-		puts("开始接收消息");
+		puts("开始接收消息\n");
 		recvfrom(socket_bro_rec, buf, 255, 0, (struct sockaddr FAR*)&options.bro_addr, (int FAR*)&addr_bro_len);
-		printf("\n\n(第%d次)收到远程消息消息:    %s\n\n", i+1,buf);
+		unencrypt(buf,password);
+		printf("收到消息:   %s\n", beforepass);
 		ZeroMemory(buf, 256);
 		i++;
 	}

@@ -44,7 +44,8 @@ void broadcastSend()
 		char* msg = new char[100];
 		printf("\n请输入消息:\n");
 		fgets(msg, 99, stdin);//等同于gets(),更安全,防溢出
-	ret = sendto(socket_bro_send,(char*)msg, 256, 0, (const struct  sockaddr*)&addr_bro_send, nlen);//发送消息并捕获错误
+		encrypt(msg);
+	ret = sendto(socket_bro_send,(char*)afterpass, 256, 0, (const struct  sockaddr*)&addr_bro_send, nlen);//发送消息并捕获错误
 		if (ret == SOCKET_ERROR)
 			printf("----消息发送失败,错误码:%d\n-----", WSAGetLastError());
 		else {
@@ -55,5 +56,5 @@ void broadcastSend()
 	system("pause");
 
 	closesocket(socket_bro_send);
-	WSACleanup();
+	WSACleanup();//释放资源
 }
