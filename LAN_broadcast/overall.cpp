@@ -10,7 +10,15 @@ struct sockaddr_in addr_bro_send; //发送者主机数据,包含端口号和ip
 struct sockaddr_in addr_bro_rec;	//接受者主机
 char get_options[3];				//未经处理的options
 struct options options;
-void initial()//初始化全局变量
+char *afterpass = new char[256];//加密之后的字符串
+char *beforepass = new char[256];//解密之后的字符串
+
+
+//功能:初始化全局变量options
+//传入参数:无
+//传出参数:无
+
+void initial()
 {
 	options.isSender = 0;		//默认是接受者
 	options.isSending = 0;		//默认不开启功能
@@ -19,5 +27,3 @@ void initial()//初始化全局变量
 	options.bro_addr = 0xffffffff;//默认ip:255.255.255.255(网关地址)
 	options.password = "111";
 }
-char *afterpass=new char[256];
-char *beforepass = new char[256];

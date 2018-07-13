@@ -4,16 +4,24 @@
 #include<WinSock2.h>//Ê¹ÓÃWindowsÌá¹©µÄ¹ØÓÚÍøÂçµÄº¯Êı
 #include<WS2tcpip.h>
 #include "overall.h"//¶¨ÒåÈ«¾Ö³£Á¿/±äÁ¿
+
+//¹¦ÄÜ:¶Ô½«Òª·¢ËÍµÄ×Ö·û´®½øĞĞ¼ÓÃÜ,´æ´¢ÔÚÈ«¾Ö±äÁ¿afterpassÖĞ
+//´«Èë±äÁ¿:ÓÃ»§ÊäÈëµÄ×Ö·û´®
+//´«³ö±äÁ¿:ÎŞ
 void encrypt(char *ch1)//Ê¹ÓÃxor½øĞĞ¼ÓÃÜÏûÏ¢
 {
 	int len = strlen(ch1);
 	int i;
 	for (i = 0;i < len-1;i++)
 	{
-		afterpass[i] = ch1[i] ^ options.password[(i%strlen(options.password))];
+		afterpass[i] = ch1[i] ^ options.password[(i%strlen(options.password))];//·ÀÖ¹passwordÎ»Êı²»×ã,Ê¹ÓÃÑ­»·
 	}
-	afterpass[i] ='\0';
+	afterpass[i] ='\0';//¶Ô\0²»¼ÓÃÜ
 }
+
+//¹¦ÄÜ:¶Ô½ÓÊÕµ½µÄ×Ö·û´®½øĞĞ½âÃÜ
+//´«Èë²ÎÊı:»ñµÃµÄ×Ö·û´®,ÃØÔ¿
+//´«³ö²ÎÊı:ÎŞ
 void unencrypt(char *ch1,char *password)//ÓÃÍ¬ÑùµÄ·½Ê½½âÃÜÏûÏ¢,µ«ÊÇÓÉÓÚÍ¬Ò»Ì¨µçÄÔÉÏ²»ÄÜÓĞÁ½¸öº¯ÊıÍ¬Ê±¶ÁÈ¡options.password(»á¶Áµ½null),ËùÒÔÍ¨¹ı´«µİ±äÁ¿µÄ·½Ê½»ñÈ¡ÃØÔ¿
 {
 	int len = strlen(ch1);
@@ -22,5 +30,5 @@ void unencrypt(char *ch1,char *password)//ÓÃÍ¬ÑùµÄ·½Ê½½âÃÜÏûÏ¢,µ«ÊÇÓÉÓÚÍ¬Ò»Ì¨µçÄ
 	{
 		beforepass[i] = ch1[i] ^ password[(i%strlen(password))];
 	}
-	beforepass[i] = '\0';
+	beforepass[i] = '\0';		//½áÎ²²¹\0
 }

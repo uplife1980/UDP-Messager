@@ -1,6 +1,10 @@
 #include<stdio.h>
 #include<conio.h> //用于无回显地读取字符
 
+
+//功能:输出帮助界面
+//传入变量:无
+//传出变量:无
 void help()
 {
 	printf("-----  -b  开启通讯服务       ----\n\n");

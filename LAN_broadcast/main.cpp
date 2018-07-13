@@ -5,7 +5,11 @@
 #include "overall.h"//定义全局常量/变量
 #include<conio.h>
 
-
+//功能:程序入口
+//     在变量设置完成后用户进行检验
+//     选择发送/接收
+//传入变量:无
+//传出变量:无
 int main()
 {
 	initial();	//初始化所有量
@@ -15,7 +19,7 @@ int main()
 	puts("\n输入  ?  以查看帮助,其余按键进入配置选项");
 	_getch() == '?' ? help() : system("cls");
 	getOptions();//获取参数
-	printf("\n\n当前参数为:IP地址:%d.%d.%d.%d\n 消息总数:%lu条\n 监听端口:%d\n 工作模式:%s\n 工作状态:%s\n传输密码:%s\n\n\n",
+	printf("\n\n当前参数为:IP地址:%d.%d.%d.%d\n 消息总数:%lu条\n 监听端口:%d\n 工作模式:%s\n 工作状态:%s\n 传输密码:%s\n\n\n",
 		a[0],a[1],a[2],a[3], options.bro_count, options.bro_port, (options.isSender?"发送":"接收"), ((options.isSending)?"工作就绪":"未工作"),options.password);
 	printf("----------------------------------\n");
 	puts("r 确认,其余按键重新配置");

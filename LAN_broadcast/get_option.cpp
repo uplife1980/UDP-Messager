@@ -6,6 +6,9 @@
 #include "overall.h"//¶¨ÒåÈ«¾Ö³£Á¿/±äÁ¿
 unsigned int a[4] = {0};
 
+//¹¦ÄÜ:»ñÈ¡Ò»¸öunsigned int ÀàĞÍ²ÎÊı
+//´«Èë±äÁ¿:ÎŞ
+//´«³ö±äÁ¿:»ñÈ¡µÄÊı×Ö
 unsigned int getNumber()
 {
 	unsigned int temp=0;
@@ -14,6 +17,10 @@ unsigned int getNumber()
 	return temp;
 
 }
+
+//¹¦ÄÜ:»ñÈ¡IP
+//´«Èë±äÁ¿:ÎŞ
+//´«³ö±äÁ¿:ËÄ¸ö0~255µÄÊı×Ö¹¹³ÉµÄÊı×é
 unsigned long int getIP()//ÊäÈëµÄÊÇ×Ö·û´®±äÁ¿,²»ÊÇconst³£Á¿,²»ÄÜÊ¹ÓÃinet_addr()×Ô¶¯×ª»»³ÉIP,Ö»ÄÜÊÖ¶¯×ª»»
 {
 	scanf_s("%d.%d.%d.%d", &a[0], &a[1], &a[2], &a[3]);
@@ -26,6 +33,10 @@ unsigned long int getIP()//ÊäÈëµÄÊÇ×Ö·û´®±äÁ¿,²»ÊÇconst³£Á¿,²»ÄÜÊ¹ÓÃinet_addr()×
 	return ip;
 }
 
+
+//¹¦ÄÜ:ÔÊĞíÓÃ»§½øĞĞÖğÒ»ÉèÖÃoptionsµÄ±äÁ¿
+//´«Èë±äÁ¿:ÎŞ
+//´«³ö±äÁ¿:ÎŞ
 void getOptions()
 {
 	unsigned int i;

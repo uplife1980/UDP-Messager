@@ -5,6 +5,11 @@
 #include<stdlib.h>
 #include "overall.h"//定义全局常量/变量
 
+
+
+//功能:接收数据
+//传入变量:无
+//传出变量:无
 void broadcastRec()
 {
 	BOOL optval = TRUE;//可重用==TRUE
@@ -33,14 +38,13 @@ void broadcastRec()
 
 		return;
 	}
-	//设置套接字可以重用,捕获错误
-	if (setsockopt(socket_bro_rec, SOL_SOCKET, SO_REUSEADDR, (char FAR*)&optval,sizeof(optval))==SOCKET_ERROR)
+	//设置套接字可以重用
+	if (setsockopt(socket_bro_rec, SOL_SOCKET, SO_REUSEADDR, (char FAR*)&optval,sizeof(optval))==SOCKET_ERROR)//名称,基本套接,允许重用,返回值指向的地址
 	{
 		printf("\n-----重用设置失败,错误代码%d-----", WSAGetLastError());
-		closesocket(socket_bro_rec);
+		closesocket(socket_bro_rec);			//释放资源
 		WSACleanup();
 		system("pause");
-
 		return;
 	}
 	//参数绑定
@@ -57,10 +61,10 @@ void broadcastRec()
 	while (i < options.bro_count)		//开始监听端口,并将获得的信息打印出来
 	{
 		puts("开始接收消息\n");
-		recvfrom(socket_bro_rec, buf, 255, 0, (struct sockaddr FAR*)&options.bro_addr, (int FAR*)&addr_bro_len);
-		unencrypt(buf,password);
+		recvfrom(socket_bro_rec, buf, 255, 0, (struct sockaddr FAR*)&options.bro_addr, (int FAR*)&addr_bro_len);//参数,报文缓存地址,长度,常数0,数据来源,地址大小
+		unencrypt(buf,password);//对消息进行解密
 		printf("收到消息:   %s\n", beforepass);
-		ZeroMemory(buf, 256);
+		ZeroMemory(buf, 256);//用0来填充buf
 		i++;
 	}
 	puts("-----消息接收完毕!-----");
